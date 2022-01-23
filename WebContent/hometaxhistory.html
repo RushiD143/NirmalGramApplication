@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Tax History</title>
+<link rel="stylesheet" href="bootstrap.min.css">
+
+<script language="Javascript" type="text/javascript">
+            
+            
+            function createRequestObject() {
+                var tmpXmlHttpObject;
+                if (window.XMLHttpRequest) {
+                        tmpXmlHttpObject = new XMLHttpRequest();
+                } else if (window.ActiveXObject) {
+                    tmpXmlHttpObject = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+            
+                return tmpXmlHttpObject;
+            }
+            
+            
+            var http = createRequestObject();
+            
+            function makeGetRequest() {
+                no=document.frm.pno.value;
+                http.open('get', 'hometaxhistory.jsp?pno=' + no);
+                http.onreadystatechange = processResponse;
+                http.send(null);
+            }
+            
+            function processResponse() {
+                if(http.readyState == 4){
+                    var response = http.responseText;
+                    document.getElementById('searchres').innerHTML = response;
+                }
+            }
+            
+            </script>
+</head>
+<body>
+<div class="container">
+<h2>Taxes History Form</h2>
+<hr>
+<form name="frm">
+Property Number <input type="text" name="pno" required>
+<input type="button" value="Search" onclick="makeGetRequest()">
+</form>
+<br><br>
+<div id="searchres">
+<img src="images/linked.gif">
+<br><br><hr><br><br>
+
+</div>
+<br>
+
+</div>
+<div class="container">
+<a href="totalhometax.html">Taxes On Properties</a>||
+<br><a href="SearchProperty.html">Back</a> || 
+<a href="Sachiv.jsp">Home</a>
+</div>
+</body>
+</html>

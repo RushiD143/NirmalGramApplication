@@ -1,0 +1,108 @@
+
+      
+       create table regpersonal
+       (
+       aadhar varchar(12),
+       FOREIGN KEY (aadhar) references registration(aadhar),
+       mobile varchar(12),
+       age int,
+       gender varchar(12),
+       sqque varchar(50),
+       ans varchar(40)
+       );
+
+       
+	   create table registration
+       (
+       aadhar varchar(20) primary key,
+       pswd varchar(12),
+       name varchar(30),
+       usertype varchar(15) default 'user',
+       status varchar(15) default 'active'
+       );
+       
+       create table peoples_info
+		(
+		aadhar varchar(12) primary key,
+		name varchar(50),
+		mobile varchar(12),
+		address varchar(50)
+		);
+    
+	create table request
+	(
+	aadhar varchar(12),
+	FOREIGN KEY (aadhar) references registration(aadhar),
+	name varchar(40),
+	torequest varchar(12),
+	message varchar(100),
+	dt date
+	);
+
+	create table properties
+    (
+    aadhar varchar(12),
+    FOREIGN KEY (aadhar) references peoples_info(aadhar),
+    name varchar(50),
+    prop_no varchar(6) primary key,
+    description varchar(50)
+    );
+    
+    create table home_tax
+     (
+       prop_no varchar(6),
+       FOREIGN KEY (prop_no) references properties(prop_no),
+       tax double,
+       year varchar(10)
+     );
+    
+  
+    
+    create table htax_transaction
+    (
+       prop_no varchar(6),
+       FOREIGN KEY (prop_no) references home_tax(prop_no),
+       amount double,
+       dt date
+    );
+ 
+  
+    create table water_tax
+     (
+       prop_no varchar(6),
+       FOREIGN KEY (prop_no) references properties(prop_no),
+       tax double,
+       year varchar(10)
+     );
+    
+  
+    
+    create table wtax_transaction
+    (
+       prop_no varchar(6),
+       FOREIGN KEY (prop_no) references water_tax(prop_no),
+       amount double,
+       dt date
+    );
+ 
+create table birth_death
+(
+aadhar varchar(12),
+FOREIGN KEY (aadhar) references peoples_info(aadhar),
+name varchar(40),
+gender varchar(10),
+status varchar(10),
+place varchar(40),
+date varchar(12)
+);
+
+create table meetings
+(
+meeting_name varchar(40),
+description varchar(100),
+dt varchar(20),
+place varchar(40)
+);
+
+
+  
